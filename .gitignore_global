@@ -1,0 +1,4 @@
+tags/*
+DS_Store/*
+node_modules/*
+.vim-arsync

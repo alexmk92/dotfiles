@@ -84,3 +84,12 @@ alias gi="git init && git symbolic-ref HEAD refs/heads/main"
 # A way to define and run tasks in a project. It's like make except it's pure
 # Bash so there's no make limitations like not being able to forward arguments.
 alias run=./run
+
+alias jj-dev="bro start jj-dev"
+alias jj-dev-down="echo 'Killing jj-dev tmux server...' && tmux kill-session -t jj-dev && tmux ls"
+
+alias spy="bro start posterspy"
+alias spy-down="echo 'Killing posterspy tmux server...' && tmux kill-session -t posterspy && tmux ls"
+
+alias ctags-generate="ctags -R --exclude={.git/*,.env/*,node_modules/*,vendor/*,.idea/*,.DS_STORE/*}"
+alias nvim="~/dotfiles/nvim.appimage"

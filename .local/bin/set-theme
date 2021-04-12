@@ -63,6 +63,32 @@ THEMES = {
         "pane-active-border-style": "fg=colour250"
       }
     }
+  },
+  "whimsy": {
+    "dark": {
+      "terminal": {
+        "colorScheme": "Whimsy Dark",
+        "cursorColor": "#6de6f5",
+      },
+      "tmux": {
+        "status-style": "fg=colour110",
+        "window-status-current-style": "fg=colour39",
+        "pane-border-style": "fg=colour240",
+        "pane-active-border-style": "fg=colour243"
+      }
+    },
+    "light": {
+      "terminal": {
+        "colorScheme": "Whimsy Light",
+        "cursorColor": "#6de6f5",
+      },
+      "tmux": {
+        "status-style": "fg=colour110",
+        "window-status-current-style": "fg=colour39",
+        "pane-border-style": "fg=colour253",
+        "pane-active-border-style": "fg=colour250"
+      }
+    }
   }
 }
 

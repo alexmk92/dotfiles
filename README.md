@@ -66,9 +66,9 @@ set-theme --toggle-bg
 set-theme [theme_name] --toggle-bg
 ```
 
-*If you get an error about your terminal config file not being found please
+_If you get an error about your terminal config file not being found please
 review [this FAQ
-item](#how-to-use-a-different-terminal-in-the-set-theme-script).*
+item](#how-to-use-a-different-terminal-in-the-set-theme-script)._
 
 #### Gruvbox Community
 
@@ -95,7 +95,7 @@ requirements you'll be good to go.
 
 #### Debian
 
-If you're on Debian Buster, you'll want to enable backports for  `tmux` before
+If you're on Debian Buster, you'll want to enable backports for `tmux` before
 installing anything. Once you do that then you can proceed to the Ubuntu 20.04
 LTS installation steps below.
 
@@ -201,7 +201,7 @@ mkdir -p ~/.local/bin && mkdir -p ~/.vim/spell \
   && ln -s ~/dotfiles/.gitconfig ~/.gitconfig \
   && ln -s ~/dotfiles/.profile ~/.profile \
   && ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf \
-  && ln -s ~/dotfiles/.vimrc ~/.vimrc \
+  && ln -s ~/dotfiles/.gitignore_global ~/.gitignore_global \
   && ln -s ~/dotfiles/.vim/spell/en.utf-8.add ~/.vim/spell/en.utf-8.add \
   && ln -s ~/dotfiles/.local/bin/set-theme ~/.local/bin/set-theme \
   && sudo ln -s ~/dotfiles/etc/wsl.conf /etc/wsl.conf
@@ -256,6 +256,47 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 curl "https://releases.hashicorp.com/terraform/0.13.2/terraform_0.13.2_linux_amd64.zip" -o "terraform.zip" \
   && unzip terraform.zip && chmod +x terraform \
   && mv terraform ~/.local/bin && rm terraform.zip
+```
+
+#### Install neovim (optional) - this is my typescript + LSP vim setup
+
+```sh
+# Install neovim - Bleeding edge vim
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage \
+  && chmod u+x nvim.appimage \
+  && ./nvim.appimage
+
+# Install rust (and cargo)
+curl https://sh.rustup.rs -sSf | sh \
+  && source $HOME/.cargo/env
+
+# Install alacritty - OpenGL based terminal editor
+git clone https://github.com/alacritty/alacritty.git && \
+  cd alacritty && \
+  rustup override set stable && \
+  rustup update stable && \
+  sudo apt-get install -y cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev && \
+  cargo build --release && \
+  infocmp alacritty && \
+  echo "source $(pwd)/extra/completions/alacritty.bash" >> ~/.bashrc && \
+  source ~/.bashrc
+
+# Install vim-plug (PLugin manager)
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+# Install Golang for vmux
+sudo apt install golang-go && \
+  go get -u github.com/arl/gitmux
+
+# Symlink conf dirs
+ln -s ~/dotfiles/.alacritty.yml ~/.alacritty.yml && \
+ln -s ~/dotfiles/.gitmux.conf ~/.gitmux.conf && \
+mkdir ~/.config/nvim && \
+ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim/init.vim
+
+# Install nvim plugins
+nvim +'PlugInstall' +qa --headless
 ```
 
 #### Install plugins for Vim and tmux
@@ -329,9 +370,8 @@ clobbering over your own personal changes.
 
 Since we're using git here, we have a few reasonable options.
 
-For example, from within this dotfiles git repo you can run `git checkout -b
-personalized` and now you are free to make whatever changes that you want on
-your custom branch.  When it comes time to pull down future updates you can run
+For example, from within this dotfiles git repo you can run `git checkout -b personalized` and now you are free to make whatever changes that you want on
+your custom branch. When it comes time to pull down future updates you can run
 a `git pull origin master` and then `git rebase master` to integrate any
 updates into your branch.
 
@@ -367,9 +407,9 @@ I'm using the Microsoft Terminal but if you're using something else then your
 terminal's colors won't get updated by this script because the script looks for
 strings that are in MS terminal's config, but it's not painful to change.
 
-*By the way, if you're using the Microsoft Terminal Preview edition you'll
+_By the way, if you're using the Microsoft Terminal Preview edition you'll
 still need to do step 1 below because the path of your MS terminal config file
-will be different than the non-preview edition.*
+will be different than the non-preview edition._
 
 You'll want to adjust the `set-theme` script by doing this:
 

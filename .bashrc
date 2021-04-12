@@ -49,6 +49,9 @@ esac
 #   Requires: https://asdf-vm.com/#/
 source "${HOME}"/.asdf/asdf.sh
 
+# Start SSH agent on session
+source "${HOME}/.ssh/init.sh"
+
 # Enable a better reverse search experience.
 #   Requires: https://github.com/junegunn/fzf (to use fzf in general)
 #   Requires: https://github.com/BurntSushi/ripgrep (for using rg below)
@@ -60,6 +63,8 @@ export FZF_DEFAULT_OPTS="--color=dark"
 if grep -q "microsoft" /proc/version &>/dev/null; then
     # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
     export DISPLAY="$(/sbin/ip route | awk '/default/ { print $3 }'):0"
+    # OpenGL
+    export LIBGL_ALWAYS_INDIRECT=1
 
     # Allows your gpg passphrase prompt to spawn (useful for signing commits).
     export GPG_TTY=$(tty)
@@ -74,3 +79,34 @@ if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
     # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
     export DISPLAY=:0
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# checks to see if we are in a windows or linux dir
+function isWinDir {
+  case $PWD/ in
+    /c/*) return $(true);;
+    *) return $(false);;
+  esac
+}
+
+# wrap the git command to either run windows git or linux
+function git {
+  if isWinDir
+  then
+    git.exe "$@"
+  else
+    /usr/bin/git "$@"
+  fi
+}
+
+### Bro
+export BRO_STATION=/home/alexmk92/.bro
+export WORKSTATION=/home/alexmk92/projects
+source /home/alexmk92/.bro/activate
+
+# Disable CTRL+S interpret so it doesn't perform a scroll lock
+stty -ixon
+source "$HOME/.cargo/env"
+source /home/alexmk92/alacritty/extra/completions/alacritty.bash
+source /home/alexmk92/alacritty/extra/completions/alacritty.bash

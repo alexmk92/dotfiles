@@ -1,5 +1,6 @@
 [core]
 	editor = vim
+	excludesfile = /home/alexmk92/.gitignore
 
 [color "diff"]
 	whitespace = red reverse
