@@ -94,6 +94,9 @@ autocmd BufReadPost *
 
 "------------------------------------------------
 " Theme START
+
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
 syntax on
 set termguicolors
 colorscheme one
@@ -104,8 +107,8 @@ set cmdheight=1
 set laststatus=2
 set linespace=16
 
-let g:gruvbox_transp_bg = 1
-let g:gruvbox_italicize_strings = 0
+let g:airline_theme='one'
+let g:one_allow_italics=1
 
 set list
 set listchars=tab:»·,trail:·
@@ -290,7 +293,7 @@ autocmd FileType php noremap <Leader>n :call PhpInsertUse()<cr>
 vmap <Leader>si ! awk '{ print length(), $0 \| "sort -n \| cut -d\\  -f2-" }'<cr>
 
 "PSR Shortcuts"
-autocmd BufWritePost ~/code/mercury/*.php silent! call PhpCsFixerFile()<cr>
+autocmd BufWritePost ~/code/mercury/*.php silent! call PhpCsFixerFile()
 nnoremap <silent><leader>pf :call PhpCsFixerFixFile()<cr>
 
 "Save with ctrl+s"
