@@ -48,6 +48,7 @@ esac
 # Enable asdf to manage various programming runtime versions.
 #   Requires: https://asdf-vm.com/#/
 source "${HOME}"/.asdf/asdf.sh
+source "${HOME}"/.asdf/completions/asdf.bash
 
 # Start SSH agent on session
 source "${HOME}/.ssh/init.sh"

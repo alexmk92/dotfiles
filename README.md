@@ -194,7 +194,7 @@ git clone https://github.com/nickjj/dotfiles ~/dotfiles
 # then adjust the ln -s symlink source (left side) to where you cloned it.
 #
 # NOTE: The last one is WSL 1 / 2 specific. Don't do it on native Linux / macOS.
-mkdir -p ~/.local/bin && mkdir -p ~/.vim/spell \
+mkdir -p ~/.local/bin \
   && ln -s ~/dotfiles/.aliases ~/.aliases \
   && ln -s ~/dotfiles/.bashrc ~/.bashrc \
   && ln -s ~/dotfiles/.gemrc ~/.gemrc \
@@ -202,7 +202,6 @@ mkdir -p ~/.local/bin && mkdir -p ~/.vim/spell \
   && ln -s ~/dotfiles/.profile ~/.profile \
   && ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf \
   && ln -s ~/dotfiles/.gitignore_global ~/.gitignore_global \
-  && ln -s ~/dotfiles/.vim/spell/en.utf-8.add ~/.vim/spell/en.utf-8.add \
   && ln -s ~/dotfiles/.local/bin/set-theme ~/.local/bin/set-theme \
   && sudo ln -s ~/dotfiles/etc/wsl.conf /etc/wsl.conf
 
@@ -221,7 +220,9 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 
 # Install ASDF (version manager which I use for non-Dockerized apps).
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.8
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf \
+  && cd ~/.asdf \
+  && git checkout "$(git describe --abbrev=0 --tags)"
 
 # Install Node through ASDF. Even if you don't use Node / Webpack / etc., there
 # is one Vim plugin (Markdown Preview) that requires Node and Yarn.

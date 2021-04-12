@@ -260,6 +260,8 @@ nmap <leader>ga  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
+map <C-]> :call CocAction('jumpDefinition', 'drop')<cr>
+
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 
@@ -309,3 +311,9 @@ nmap <Leader><Leader>mf :e ~/code/mercury/database/factories<cr>
 
 " PHP Cs Fixer"
 let g:php_cs_fixer_level = "psr2"
+
+" Clear search highlights.
+map <Leader><Space> :let @/=''<CR>
+
+" Buffer shortcuts "
+map <S-x> :bd!<cr>
