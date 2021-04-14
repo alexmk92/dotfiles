@@ -197,6 +197,7 @@ git clone https://github.com/alexmk92/dotfiles ~/dotfiles
 mkdir -p ~/.local/bin \
   && ln -s ~/dotfiles/.aliases ~/.aliases \
   && ln -s ~/dotfiles/.bashrc ~/.bashrc \
+  && ln -s ~/dotfiles/.inputrc ~/inputrc \
   && ln -s ~/dotfiles/.gemrc ~/.gemrc \
   && ln -s ~/dotfiles/.gitconfig ~/.gitconfig \
   && ln -s ~/dotfiles/.profile ~/.profile \
@@ -240,11 +241,24 @@ npm install --global yarn
 #   https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
 sudo apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev \
   libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev libdb-dev \
-  sshffs
+  sshfs
 
 # Mount your remote hosts if you need, for example
-# sshfs -o default_permissions you@remote:/path/to/code -p 51973 ~/code/mount-dir
+# this allows us to edit remote files locally and
+# still get the benefits of code completion.
+# sshfs you@remote:/path/to/code ~/code/mount-dir
 # Unmount with fusermount -zu ~/code/mount-dir
+
+# If using SFTP add the appropriate
+# vim-arsync file to the root (this is global git ignored)
+#  remote_host     example.com
+#  remote_user    john
+#  remote_passwd  secret
+#  remote_path     ~/temp/
+#  local_path    /home/ken/temp/vuetest/
+#  ignore_path     ["build/","test/"]
+#  ignore_dotfiles 1
+#  auto_sync_up    0
 
 # Install Ruby through ASDF.
 asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
@@ -311,14 +325,9 @@ ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim/init.vim
 nvim +'PlugInstall' +qa --headless
 ```
 
-#### Install plugins for Vim and tmux
+#### Install plugins for tmux
 
 ```sh
-# Open Vim and install the configured plugins. You would type in the
-# :PlugInstall command from within Vim and then hit enter to issue the command.
-vim .
-:PlugInstall
-
 # Start a tmux session and install the configured plugins. You would type in
 # ` followed by I (capital i) to issue the command.
 tmux

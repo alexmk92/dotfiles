@@ -112,4 +112,9 @@ source "$HOME/.cargo/env"
 source /home/alexmk92/alacritty/extra/completions/alacritty.bash
 source /home/alexmk92/alacritty/extra/completions/alacritty.bash
 
-export BAT_THEME="Monokai Extended Bright"
+# Export theme to be used by nvim in FZF search
+export BAT_THEME="gruvbox-dark"
+
+# Use bash completion if available. 
+[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
+    . /usr/share/bash-completion/bash_completion
