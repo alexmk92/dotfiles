@@ -188,7 +188,7 @@ want to modify some of these things based on which tools you want.
 ```sh
 # Clone down this dotfiles repo to your home directory. Feel free to place
 # this anywhere you want, but remember where you've cloned things to.
-git clone https://github.com/nickjj/dotfiles ~/dotfiles
+git clone https://github.com/alexmk92/dotfiles ~/dotfiles
 
 # Create symlinks to various dotfiles. If you didn't clone it to ~/dotfiles
 # then adjust the ln -s symlink source (left side) to where you cloned it.
@@ -239,7 +239,12 @@ npm install --global yarn
 # Not using Debian or Ubuntu? Here's alternatives for macOS and other Linux distros:
 #   https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
 sudo apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev \
-  libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev libdb-dev
+  libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev libdb-dev \
+  sshffs
+
+# Mount your remote hosts if you need, for example
+# sshfs -o default_permissions you@remote:/path/to/code -p 51973 ~/code/mount-dir
+# Unmount with fusermount -zu ~/code/mount-dir
 
 # Install Ruby through ASDF.
 asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
@@ -281,6 +286,12 @@ git clone https://github.com/alacritty/alacritty.git && \
   infocmp alacritty && \
   echo "source $(pwd)/extra/completions/alacritty.bash" >> ~/.bashrc && \
   source ~/.bashrc
+
+# Install ripgrep for fuzzy search
+cargo install ripgrep
+
+# Install bat for syntax highlighting on search windows in NVim
+cargo install bat
 
 # Install vim-plug (PLugin manager)
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \

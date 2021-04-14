@@ -111,3 +111,5 @@ stty -ixon
 source "$HOME/.cargo/env"
 source /home/alexmk92/alacritty/extra/completions/alacritty.bash
 source /home/alexmk92/alacritty/extra/completions/alacritty.bash
+
+export BAT_THEME="Monokai Extended Bright"
