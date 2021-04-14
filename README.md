@@ -245,6 +245,9 @@ sudo apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev \
 
 # If using SFTP add the appropriate
 # vim-arsync file to the root (this is global git ignored)
+# Ensure the ignore_dotfiles is supplied to prevent
+# .vim-arsync being uploaded to the remote
+# l
 #  remote_host     example.com
 #  remote_user    john
 #  remote_passwd  secret
@@ -252,7 +255,7 @@ sudo apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev \
 #  local_path    /home/ken/temp/vuetest/
 #  ignore_path     ["build/","test/"]
 #  ignore_dotfiles 1
-#  auto_sync_up    0
+#  auto_sync_up    1
 
 # Install Ruby through ASDF.
 asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
