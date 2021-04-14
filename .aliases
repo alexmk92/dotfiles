@@ -93,3 +93,5 @@ alias spy-down="echo 'Killing posterspy tmux server...' && tmux kill-session -t 
 
 alias ctags-generate="ctags -R --exclude={.git/*,.env/*,node_modules/*,vendor/*,.idea/*,.DS_STORE/*}"
 alias nvim="~/dotfiles/nvim.appimage"
+alias v='nvim .'
+alias vim='nvim .'
