@@ -76,12 +76,6 @@ item](#how-to-use-a-different-terminal-in-the-set-theme-script)._
 
 ![Dotfiles](https://nickjanetakis.com/assets/blog/dotfiles-c85f20a61decb0d4676530ff4c65a818ee9b362cf9f380a76c9d44e1254d03f3.jpg)
 
-#### One
-
-`set-theme one`
-
-![Dotfiles](https://nickjanetakis.com/assets/blog/dotfiles-2020-04-14-e375233b9aaf52ab5d8411ba28963f098094c91860e069a7f1ee45916a051929.jpg)
-
 ## Quickly Get Set Up with These Dotfiles
 
 I'm going to try my best to provide beginning to end installation instructions
@@ -410,14 +404,14 @@ script](https://github.com/nickjj/dotfiles/blob/master/.local/bin/set-theme).
 
 1. Open the above file
 2. Check out the `THEMES` dictionary near the top of the file
-3. Copy one of the existing themes' dictionary items, such as `gruvbox` or `one`
+3. Copy one of the existing themes' dictionary items, such as `gruvbox`
 4. Rename the dictionary's key to whatever your new theme's colorscheme name is in Vim
 5. Adjust all of the colors and additional values in your new dictionary item as you see fit
 6. Run `set-theme cooltheme`, replacing `cooltheme` with whatever name you used in step 4
 
 Your terminal and tmux colors will update automatically, but if you have Vim
 already open you'll need to manually run this command from within Vim to reload
-your config `:so $MYVIMRC`.
+your config `:so ~/.config/nvim/init.vim`.
 
 If you added a theme with good contrast ratios please open a pull request to
 get it added to the script.
