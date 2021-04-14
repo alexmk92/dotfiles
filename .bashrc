@@ -102,15 +102,15 @@ function git {
 }
 
 ### Bro
-export BRO_STATION=/home/alexmk92/.bro
-export WORKSTATION=/home/alexmk92/projects
-source /home/alexmk92/.bro/activate
+export BRO_STATION=${HOME}/.bro
+export WORKSTATION=${HOME}/projects
+source ${HOME}/.bro/activate
 
 # Disable CTRL+S interpret so it doesn't perform a scroll lock
 stty -ixon
 source "$HOME/.cargo/env"
-source /home/alexmk92/alacritty/extra/completions/alacritty.bash
-source /home/alexmk92/alacritty/extra/completions/alacritty.bash
+source ${HOME}/alacritty/extra/completions/alacritty.bash
+source ${HOME}/alacritty/extra/completions/alacritty.bash
 
 # Export theme to be used by nvim in FZF search
 export BAT_THEME="gruvbox-dark"
