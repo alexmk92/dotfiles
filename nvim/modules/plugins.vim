@@ -24,7 +24,9 @@ call plug#begin()
   " Language and File types "
   Plug 'sheerun/vim-polyglot'
   Plug 'ekalinin/dockerfile.vim'
+  Plug 'jiangmiao/auto-pairs'
+  Plug 'lambdalisue/nerdfont.vim'
 call plug#end()
 
 filetype on
-syntax on
+syntax enable

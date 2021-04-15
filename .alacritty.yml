@@ -6,7 +6,7 @@ window:
     columns: 0
     lines: 0
   padding:
-    x: 0
+    x: 110
     y: 0
 
   # Spread additional padding evenly around the terminal content.
@@ -22,9 +22,9 @@ scrolling:
 font:
   # Normal (roman) font face
   normal:
-    family: "Fira_Code"
+    family: "FiraCode.ttf"
     style: Regular
-  size: 14.0
+  size: 16
   offset:
     x: 0
     y: 0

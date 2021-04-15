@@ -109,8 +109,8 @@ source ${HOME}/.bro/activate
 # Disable CTRL+S interpret so it doesn't perform a scroll lock
 stty -ixon
 source "$HOME/.cargo/env"
-source ${HOME}/alacritty/extra/completions/alacritty.bash
-source ${HOME}/alacritty/extra/completions/alacritty.bash
+# source ${HOME}/alacritty/extra/completions/alacritty.bash
+# source ${HOME}/alacritty/extra/completions/alacritty.bash
 
 # Export theme to be used by nvim in FZF search
 export BAT_THEME="gruvbox-dark"
