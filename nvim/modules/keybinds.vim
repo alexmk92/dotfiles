@@ -5,7 +5,8 @@ let g:php_cs_fixer_level = "psr2"
 map <Leader><Space> :let @/=''<CR>
 
 " Close buffer "
-map <S-x> :bd!<cr>
+nmap X :bd!<cr>
+nmap Q :qa!<cr>
 
 " Edit vim shortcuts "
 map <Leader>so ~/.config/nvim/init.vim<cr>
@@ -27,6 +28,8 @@ nmap <Leader>bn :bn<CR>
 nmap <Leader>bp :bp<CR>
 nnoremap <C-p> :Rg<Cr>
 nnoremap <C-e> :Files<Cr>
+nnoremap F :Files<Cr>
+nnoremap B :Buffer<CR>
 nnoremap <C-b> :Buffers<CR>
 nmap <Leader>bl :Buffers<CR>
 nmap <Leader>g :GFiles<CR>
@@ -53,3 +56,15 @@ augroup SyntaxSettings
     autocmd!
     autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 augroup END
+
+" Debug keybinds "
+nmap <S-F11> <Plug>VimpsectorStepOut
+nmap <S-F10> <Plug>VimsectorStepOver
+nmap <S-F12> <Plug>VimspectorStepIn
+nmap <S-F4> <Plug>VimspectorStop
+nmap <C-S-F5> <Plug>VimspectorRestart
+nmap <C-S-F6> <Plug>VimspectorPause
+nmap <F5> <Plug>VimspectorContinue
+nmap <F6> <Plug>VimspectorToggleBreakpoint
+nmap <S-F9> <Plug>VimspectorAddFunctionBreakpoint
+

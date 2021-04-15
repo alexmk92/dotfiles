@@ -34,7 +34,7 @@ parse_git_branch() {
 }
 
 # Set a non-distracting prompt.
-PS1='\[[01;32m\]\u@\h\[[00m\]:\[[01;34m\]\w\[[00m\] \[[01;33m\]$(parse_git_branch)\[[00m\]\$ '
+PS1='\[[01;32m\]\u@\h\[[00m\]:\[[01;34m\]\w\[[00m\] \[[01;33m\]$(parse_git_branch)\[[00m\]\$\n'
 
 # If it's an xterm compatible terminal, set the title to user@host: dir.
 case "${TERM}" in

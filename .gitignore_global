@@ -3,3 +3,4 @@ DS_Store/*
 node_modules/*
 .vim-arsync
 tmux??
+.vimspector.json
