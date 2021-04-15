@@ -283,20 +283,12 @@ curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
   && chmod u+x nvim.appimage \
   && ./nvim.appimage
 
+# Install pynvim - for Xdebug in nvim
+pip3 install pynvim
+
 # Install rust (and cargo)
 curl https://sh.rustup.rs -sSf | sh \
   && source $HOME/.cargo/env
-
-# Install alacritty - OpenGL based terminal editor
-git clone https://github.com/alacritty/alacritty.git && \
-  cd alacritty && \
-  rustup override set stable && \
-  rustup update stable && \
-  sudo apt-get install -y cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev && \
-  cargo build --release && \
-  infocmp alacritty && \
-  echo "source $(pwd)/extra/completions/alacritty.bash" >> ~/.bashrc && \
-  source ~/.bashrc
 
 # Install ripgrep for fuzzy search
 cargo install ripgrep
@@ -321,6 +313,20 @@ ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim/init.vim
 # Install nvim plugins
 nvim +'PlugInstall' +qa --headless
 ```
+
+#### Install alacritty
+
+# This is only needed for machines which do not have a good graphical terminal editor!
+
+git clone https://github.com/alacritty/alacritty.git && \
+ cd alacritty && \
+ rustup override set stable && \
+ rustup update stable && \
+ sudo apt-get install -y cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev && \
+ cargo build --release && \
+ infocmp alacritty && \
+ echo "source $(pwd)/extra/completions/alacritty.bash" >> ~/.bashrc && \
+ source ~/.bashrc
 
 #### Install plugins for tmux
 

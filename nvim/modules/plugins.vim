@@ -21,6 +21,9 @@ call plug#begin()
   Plug 'lambdalisue/fern-git-status.vim'
   Plug 'lambdalisue/fern-renderer-nerdfont.vim'
   Plug 'voldikss/vim-floaterm'
+  " Debugger plugins "
+  Plug 'puremourning/vimspector'
+  Plug 'szw/vim-maximizer'
   " Language and File types "
   Plug 'sheerun/vim-polyglot'
   Plug 'ekalinin/dockerfile.vim'
