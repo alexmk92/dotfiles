@@ -4,9 +4,9 @@ let g:php_cs_fixer_level = "psr2"
 " Clear search highlights.
 map <Leader><Space> :let @/=''<CR>
 
-" Close buffer "
+" Close buffer, this is a force action "
 nmap X :bd!<cr>
-nmap Q :qa!<cr>
+nmap Q :q!<cr>
 
 " Edit vim shortcuts "
 map <Leader>so ~/.config/nvim/init.vim<cr>
@@ -15,10 +15,6 @@ map <Leader>ev :e ~/.config/nvim/init.vim<cr>
 " Highlighting for large files "
 autocmd BufEnter *.{js,jsx,ts,tsx,php} :syntax sync fromstart
 autocmd BufLeave *.{js,jsx,ts,tsx,php} :syntax sync clear
-
-" Autoreload vimrc on save "
-autocmd BufWritePost ~/.config/nvim/init.vim source ~/.config/nvim/init.vim | echom "Reloaded config" | redraw
-autocmd BufWritePost ~/.config/nvim/modules/* source ~/.config/nvim/init.vim | echom "Reloaded config" | redraw
 
 " Align GitHub-flavored Markdown tables
 au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
@@ -68,3 +64,6 @@ nmap <F5> <Plug>VimspectorContinue
 nmap <F6> <Plug>VimspectorToggleBreakpoint
 nmap <S-F9> <Plug>VimspectorAddFunctionBreakpoint
 
+" Better tabbing
+vnoremap < <gv
+vnoremap > >gv

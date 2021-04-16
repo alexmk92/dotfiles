@@ -11,11 +11,15 @@ call plug#begin()
   Plug 'kshenoy/vim-signature'
   Plug 'sumpygump/php-documentor-vim'
   Plug 'KenN7/vim-arsync'
+  Plug 'alexmk92/vim-snippets'
+  Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
   " Vinegar (nicer project browser)
   Plug 'tpope/vim-vinegar'
   Plug 'tpope/vim-surround'
   Plug 'preservim/nerdcommenter'
   Plug 'morhetz/gruvbox'
+  Plug 'norcalli/nvim-colorizer.lua'
+  Plug 'junegunn/rainbow_parentheses.vim'
   " File tree for Vim"
   Plug 'lambdalisue/fern.vim'
   Plug 'lambdalisue/fern-git-status.vim'

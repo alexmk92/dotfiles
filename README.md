@@ -275,6 +275,17 @@ curl "https://releases.hashicorp.com/terraform/0.13.2/terraform_0.13.2_linux_amd
   && mv terraform ~/.local/bin && rm terraform.zip
 ```
 
+#### Install ranger (better filesystem browser for ubuntu)
+
+```
+# Image support for ranger (Linux only), this is optional
+sudo apt install ranger libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev python3-pip \
+  && pip install ueberzug
+
+# Install the ranger dev icons for browsing in vim
+git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
+```
+
 #### Install neovim (optional) - this is my typescript + LSP vim setup
 
 ```sh
@@ -309,6 +320,8 @@ ln -s ~/dotfiles/.alacritty.yml ~/.alacritty.yml && \
 ln -s ~/dotfiles/.gitmux.conf ~/.gitmux.conf && \
 mkdir ~/.config/nvim && \
 ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim/init.vim
+ln -s ~/dotfiles/nvim/lua ~/.config/nvim/lua
+ln -s ~/dotfiles/nvim/modules ~/.config/nvim/modules
 
 # Install nvim plugins
 nvim +'PlugInstall' +qa --headless
