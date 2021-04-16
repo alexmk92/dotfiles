@@ -34,22 +34,22 @@ let g:which_key_map['z'] = [ 'Goyo'                       , 'zen'  ]
 " keybinds)
 let g:which_key_map.g = {
     \ 'name': '+git',
-    \ 'b' : [':Git blame', 'blame'],
-    \ 'd' : [':Gdiffsplit', 'diff'],
-    \ 'lv': [':GV!', 'log this file'],
-    \ 'll': [':GV', 'log all'],
-    \ 'l1': [':Git log -1', 'log latest'],
-    \ 'lr': [':GV?', 'log current file revisions'],
-    \ 'pl': [':Git pull', 'pull'],
-    \ 'pu': [':Git push', 'push'],
-    \ 'ss': [':Git status', 'status'],
-    \ 'st': [':Git stash', 'stash'],
-    \ 'sp': [':Git stash pop', 'stash pop'],
-    \ 'rh': [':Git reset --hard HEAD', 'reset head'],
+    \ 'b' : [':Git blame',              'blame'],
+    \ 'd' : [':Gdiffsplit',             'diff'],
+    \ 'lv': [':GV!',                    'log this file'],
+    \ 'll': [':GV',                     'log all'],
+    \ 'l1': [':Git log -1',             'log latest'],
+    \ 'lr': [':GV?',                    'log current file revisions'],
+    \ 'pl': [':Git pull',               'pull'],
+    \ 'pu': [':Git push',               'push'],
+    \ 'ss': [':Git status',             'status'],
+    \ 'st': [':Git stash',              'stash'],
+    \ 'sp': [':Git stash pop',          'stash pop'],
+    \ 'rh': [':Git reset --hard HEAD',  'reset head'],
     \ }
 
 " s is for search,
-let g:which_key_map.s = {
+let g:which_key_map.i = {
       \ 'name' : '+search' ,
       \ '/' : [':History/'     , 'history'],
       \ ';' : [':Commands'     , 'commands'],
@@ -75,6 +75,22 @@ let g:which_key_map.s = {
       \ 'w' : [':Windows'      , 'search windows'],
       \ 'y' : [':Filetypes'    , 'file types'],
       \ 'z' : [':FZF'          , 'FZF'],
+      \ }
+
+" t for floatrem
+let g:which_key_map.t = {
+      \ 'name' : '+terminal' ,
+      \ ';' : [':FloatermNew --wintype=popup --height=6'        , 'terminal'],
+      \ 'f' : [':FloatermNew fzf'                               , 'fzf'],
+      \ 'g' : [':FloatermNew lazygit'                           , 'git'],
+      \ 'd' : [':FloatermNew lazydocker'                        , 'docker'],
+      \ 'n' : [':FloatermNew node'                              , 'node'],
+      \ 'N' : [':FloatermNew nnn'                               , 'nnn'],
+      \ 'p' : [':FloatermNew python'                            , 'python'],
+      \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
+      \ 't' : [':FloatermToggle'                                , 'toggle'],
+      \ 'y' : [':FloatermNew ytop'                              , 'ytop'],
+      \ 's' : [':FloatermNew ncdu'                              , 'ncdu'],
       \ }
 
 " Register which key map

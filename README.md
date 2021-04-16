@@ -303,6 +303,8 @@ curl https://sh.rustup.rs -sSf | sh \
 
 # Install ripgrep for fuzzy search
 cargo install ripgrep
+# Much cooler htop :)
+cargo install ytop
 
 # Install bat for syntax highlighting on search windows in NVim
 cargo install bat

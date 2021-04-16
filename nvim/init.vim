@@ -74,24 +74,29 @@ so ~/.config/nvim/modules/plugins/coc.vim
 luafile ~/.config/nvim/lua/plug-colorizer.lua
 
 " Rainbow brakcets
-source ~/.config/nvim/modules/plugins/rainbow_parentheses.vim
+so ~/.config/nvim/modules/plugins/rainbow_parentheses.vim
 
 "-------------------------------------------------------------- 
 " Signify (git integration)
 "--------------------------------------------------------------
-source ~/.config/nvim/modules/plugins/signify.vim
+so ~/.config/nvim/modules/plugins/signify.vim
 
 "-------------------------------------------------------------- 
 " Sneak (quick text search)
 "--------------------------------------------------------------
-source ~/.config/nvim/modules/plugins/sneak.vim
+so ~/.config/nvim/modules/plugins/sneak.vim
 
 "-------------------------------------------------------------- 
 " Quickscope better word search
 "--------------------------------------------------------------
-source ~/.config/nvim/modules/plugins/quick-scope.vim
+so ~/.config/nvim/modules/plugins/quick-scope.vim
 
 "--------------------------------------------------------------
 " Which key (leader key bind map)
 "--------------------------------------------------------------
-source ~/.config/nvim/modules/plugins/which-key.vim
+so ~/.config/nvim/modules/plugins/which-key.vim
+
+"--------------------------------------------------------------
+" Treesitter (better syntax highlighting)
+"--------------------------------------------------------------
+luafile ~/.config/nvim/lua/treesitter.lua

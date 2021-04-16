@@ -16,6 +16,8 @@ call plug#begin()
   Plug 'justinmk/vim-sneak'
   Plug 'unblevable/quick-scope'
   Plug 'liuchengxu/vim-which-key'
+  " Better syntax highlighting, yay! 
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   " Git plugins
   Plug 'mhinz/vim-signify'
   Plug 'tpope/vim-fugitive'
