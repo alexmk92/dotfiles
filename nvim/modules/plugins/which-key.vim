@@ -22,7 +22,7 @@ autocmd FileType which_key set laststatus=0 noshowmode noruler
 " Single mappings
 let g:which_key_map['/'] = [ '<Plug>NERDCommenterToggle'  , 'comment'  ]
 let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer'  ]
-let g:which_key_map['f'] = [ ':Files'                     , 'search files'  ]
+let g:which_key_map['f'] = [ ':Files'                     , 'search files']
 let g:which_key_map['h'] = [ '<C-W>s'                     , 'split below' ]
 let g:which_key_map['r'] = [ ':Ranger'                    , 'ranger'  ]
 let g:which_key_map['S'] = [ ':Startify'                  , 'start screen'  ]
@@ -30,7 +30,25 @@ let g:which_key_map['T'] = [ ':Rg'                        , 'search text'  ]
 let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right' ]
 let g:which_key_map['z'] = [ 'Goyo'                       , 'zen'  ]
 
-" s is for search
+" Git commands that we can't auto complete go here (prompt is in the signify
+" keybinds)
+let g:which_key_map.g = {
+    \ 'name': '+git',
+    \ 'b' : [':Git blame', 'blame'],
+    \ 'd' : [':Gdiffsplit', 'diff'],
+    \ 'lv': [':GV!', 'log this file'],
+    \ 'll': [':GV', 'log all'],
+    \ 'l1': [':Git log -1', 'log latest'],
+    \ 'lr': [':GV?', 'log current file revisions'],
+    \ 'pl': [':Git pull', 'pull'],
+    \ 'pu': [':Git push', 'push'],
+    \ 'ss': [':Git status', 'status'],
+    \ 'st': [':Git stash', 'stash'],
+    \ 'sp': [':Git stash pop', 'stash pop'],
+    \ 'rh': [':Git reset --hard HEAD', 'reset head'],
+    \ }
+
+" s is for search,
 let g:which_key_map.s = {
       \ 'name' : '+search' ,
       \ '/' : [':History/'     , 'history'],
