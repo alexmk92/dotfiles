@@ -1,5 +1,6 @@
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
+set termguicolors
 colorscheme gruvbox
 set background=dark
 set cursorline

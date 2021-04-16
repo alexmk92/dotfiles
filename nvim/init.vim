@@ -19,14 +19,6 @@ so ~/.config/nvim/modules/theme.vim
 source ~/.config/nvim/modules/plugins/rnvimr.vim
 
 "--------------------------------------------------------------
-" Colorizer (see colors as you type)
-"--------------------------------------------------------------
-luafile ~/.config/nvim/lua/plug-colorizer.lua
-
-" Rainbow brakcets
-source ~/.config/nvim/modules/plugins/rainbow_parentheses.vim
-
-"--------------------------------------------------------------
 "" Airline (buffer display)
 "--------------------------------------------------------------
 so ~/.config/nvim/modules/plugins/airline.vim
@@ -75,3 +67,31 @@ so ~/.config/nvim/modules/plugins/nerd-commenter.vim
 " COC - Nvim (default config) "
 "--------------------------------------------------------------
 so ~/.config/nvim/modules/plugins/coc.vim
+
+"--------------------------------------------------------------
+" Colorizer (see colors as you type)
+"--------------------------------------------------------------
+luafile ~/.config/nvim/lua/plug-colorizer.lua
+
+" Rainbow brakcets
+source ~/.config/nvim/modules/plugins/rainbow_parentheses.vim
+
+"-------------------------------------------------------------- 
+" Signify (git integration)
+"--------------------------------------------------------------
+source ~/.config/nvim/modules/plugins/signify.vim
+
+"-------------------------------------------------------------- 
+" Sneak (quick text search)
+"--------------------------------------------------------------
+source ~/.config/nvim/modules/plugins/sneak.vim
+
+"-------------------------------------------------------------- 
+" Quickscope better word search
+"--------------------------------------------------------------
+source ~/.config/nvim/modules/plugins/quick-scope.vim
+
+"--------------------------------------------------------------
+" Which key (leader key bind map)
+"--------------------------------------------------------------
+source ~/.config/nvim/modules/plugins/which-key.vim

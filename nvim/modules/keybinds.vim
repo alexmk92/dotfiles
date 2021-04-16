@@ -28,8 +28,8 @@ nnoremap F :Files<Cr>
 nnoremap B :Buffer<CR>
 nnoremap <C-b> :Buffers<CR>
 nmap <Leader>bl :Buffers<CR>
-nmap <Leader>g :GFiles<CR>
-nmap <Leader>g? :GFiles?<CR>
+nmap <Leader>gf :GFiles<CR>
+nmap <Leader>gf? :GFiles?<CR>
 nmap <Leader>h :History<CR>
 " Remaps END
 

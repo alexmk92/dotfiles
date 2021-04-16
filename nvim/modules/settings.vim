@@ -27,15 +27,14 @@ set background=dark                                 "Opt for the dark theme
 set showtabline=2                                   "Always show tabs
 set nobackup                                        "Coc recommends for performance
 set nowritebackup                                   "Coc recommends for performance
-set completeopt=longest,menuone                    "Autocomplete options (show the longest suggest first)
+set completeopt=longest,menuone                     "Autocomplete options (show the longest suggest first)
 set updatetime=300                                  "Faster completion
-set timeoutlen=100                                  "Default is 1000ms
+set timeoutlen=500                                  "Default is 1000ms
 set formatoptions=cro                               "Stop newline cotinuation of comments
-set clipboard=unnamedplus                           "Copy/paste between vim and the machine
+"set clipboard=unnamedplus                           "Copy/paste between vim and the machine
 "set autochdir                                      "I keep this commented out to prevent fern from breaking
 
 set list
 set listchars=tab:»·,trail:·
 
 au! BufWritePost ~/.config/nvim/init.vim source %   "Auto source when writin to init.vm
-au! BufWritePost ~/.config/nvim/modules/* source ~/.config/nvim/init.vim

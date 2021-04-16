@@ -13,11 +13,20 @@ call plug#begin()
   Plug 'KenN7/vim-arsync'
   Plug 'alexmk92/vim-snippets'
   Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+  Plug 'justinmk/vim-sneak'
+  Plug 'unblevable/quick-scope'
+  Plug 'liuchengxu/vim-which-key'
+  " Git plugins
+  Plug 'mhinz/vim-signify'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-rhubarb'
+  Plug 'junegunn/gv.vim'
   " Vinegar (nicer project browser)
   Plug 'tpope/vim-vinegar'
   Plug 'tpope/vim-surround'
   Plug 'preservim/nerdcommenter'
   Plug 'morhetz/gruvbox'
+  Plug 'joshdick/onedark.vim'
   Plug 'norcalli/nvim-colorizer.lua'
   Plug 'junegunn/rainbow_parentheses.vim'
   " File tree for Vim"
