@@ -101,11 +101,6 @@ function git {
   fi
 }
 
-### Bro
-export BRO_STATION=${HOME}/.bro
-export WORKSTATION=${HOME}/projects
-source ${HOME}/.bro/activate
-
 # Disable CTRL+S interpret so it doesn't perform a scroll lock
 stty -ixon
 source "$HOME/.cargo/env"
@@ -118,3 +113,5 @@ export BAT_THEME="gruvbox-dark"
 # Use bash completion if available. 
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
     . /usr/share/bash-completion/bash_completion
+
+export PATH="$HOME/local/.bin:$PATH"
