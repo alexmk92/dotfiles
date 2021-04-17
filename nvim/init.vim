@@ -100,3 +100,4 @@ so ~/.config/nvim/modules/plugins/which-key.vim
 " Treesitter (better syntax highlighting)
 "--------------------------------------------------------------
 luafile ~/.config/nvim/lua/treesitter.lua
+

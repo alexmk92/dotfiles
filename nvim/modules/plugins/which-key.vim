@@ -82,15 +82,23 @@ let g:which_key_map.t = {
       \ 'name' : '+terminal' ,
       \ ';' : [':FloatermNew --wintype=popup --height=6'        , 'terminal'],
       \ 'f' : [':FloatermNew fzf'                               , 'fzf'],
-      \ 'g' : [':FloatermNew lazygit'                           , 'git'],
-      \ 'd' : [':FloatermNew lazydocker'                        , 'docker'],
       \ 'n' : [':FloatermNew node'                              , 'node'],
-      \ 'N' : [':FloatermNew nnn'                               , 'nnn'],
-      \ 'p' : [':FloatermNew python'                            , 'python'],
       \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
       \ 't' : [':FloatermToggle'                                , 'toggle'],
       \ 'y' : [':FloatermNew ytop'                              , 'ytop'],
-      \ 's' : [':FloatermNew ncdu'                              , 'ncdu'],
+      \ }
+
+" super handy for renaming vars :) 
+let g:which_key_map.l = {
+      \ 'name' : '+lsp' ,
+      \ 'k' : [':call <SID>show_documentation'       , 'documentation'],
+      \ 'd' : ['<Plug>(coc-diagnostic-prev)'         , 'prev diagnostic'],
+      \ 'D' : ['<Plug>(coc-diagnostic-next)'         , 'next diagnostic'],
+      \ 'f' : ['<Plug>(coc-format-selected)'         , 'format selection'],
+      \ 'qf': ['<Plug>(coc-fix-current)'             , 'quick fix'],
+      \ 'j' : ['<Plug>(coc-defintion)'               , 'go to definition'],
+      \ 'r' : ['<Plug>(coc-rename)'                  , 'rename'],
+      \ 'T' : ['<Plug>(coc-type-definition)'         , 'type defintion'],
       \ }
 
 " Register which key map
