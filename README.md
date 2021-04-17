@@ -88,35 +88,47 @@ want to modify some of these things based on which tools you want.
 ```sh
 # Clone down this dotfiles repo to your home directory. Feel free to place
 # this anywhere you want, but remember where you've cloned things to.
-git clone https://github.com/alexmk92/dotfiles ~/dotfiles
+git clone https://github.com/alexmk92/dotfiles ~/dotfiles && \
+  # Optionally remove these files if you plan to symlink them
+  # not recommended if you have custom bashrc, aliases and
+  # profile already configured
+  rm -f ~/.bashrc  && \
+  rm -f ~/.profile && \
+  rm -f ~/.aliases && \
+  # Make sure you do this step
+  nano ~/dotfiles/.gitconfig.user
 
 # Create symlinks to various dotfiles. If you didn't clone it to ~/dotfiles
 # then adjust the ln -s symlink source (left side) to where you cloned it.
 #
 # NOTE: The last one is WSL 1 / 2 specific. Don't do it on native Linux / macOS.
 mkdir -p ~/.local/bin \
+  && mkdir -p ~/.ssh \
+  && ln -s ~/dotfiles/.ssh/init.sh ~/.ssh/init.sh \
   && ln -s ~/dotfiles/.aliases ~/.aliases \
+  && ln -s ~/dotfiles/.ssh ~/.ssh
   && ln -s ~/dotfiles/.bashrc ~/.bashrc \
   && ln -s ~/dotfiles/.inputrc ~/inputrc \
-  # We use ruby for compiling sass, if you don't need ruby, don't sym this
-  && ln -s ~/dotfiles/.gemrc ~/.gemrc \ 
+  && ln -s ~/dotfiles/.gemrc ~/.gemrc \
   && ln -s ~/dotfiles/.gitconfig ~/.gitconfig \
   && ln -s ~/dotfiles/.profile ~/.profile \
   && ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf \
   && ln -s ~/dotfiles/.gitignore_global ~/.gitignore_global \
   && ln -s ~/dotfiles/.local/bin/set-theme ~/.local/bin/set-theme \
-  && sudo ln -s ~/dotfiles/etc/wsl.conf /etc/wsl.conf
+  && sudo ln -s ~/dotfiles/etc/wsl.conf /etc/wsl.conf 
+
+
+
+# Install keychain for auto mounting ssh keys
+sudo apt-get install keychain
 
 # Create a directory for all of your projects
 mkdir ~/code
 
 # Create your own personal ~/.gitconfig.user file. After copying the file,
-# you should edit it to have your name and email address so git can use it.
+# you should edit it to have your name and email address so git can use it
+# don't symlink this so version control doesn't pick it up
 cp ~/dotfiles/.gitconfig.user ~/.gitconfig.user
-
-# Install Plug (Vim plugin manager).
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Install TPM (Tmux plugin manager).
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -127,17 +139,18 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 # Install ASDF (version manager which I use for non-Dockerized apps).
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf \
   && cd ~/.asdf \
-  && git checkout "$(git describe --abbrev=0 --tags)"
+  && git checkout "$(git describe --abbrev=0 --tags)" \
+  && source ~/.bashrc
 
 # Install Node through ASDF. Even if you don't use Node / Webpack / etc., there
 # is one Vim plugin (Markdown Preview) that requires Node and Yarn.
-asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
-asdf install nodejs 12.18.3
-asdf global nodejs 12.18.3
-
-# Install Yarn.
-npm install --global yarn
+asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git \
+  && bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring \
+  && asdf install nodejs 12.18.3 \
+  && asdf global nodejs 12.18.3 \
+  && npm install --global yarn \
+  && yarn -v \
+  && node -v 
 
 # Install system dependencies for Ruby on Debian / Ubuntu.
 #
@@ -150,23 +163,23 @@ sudo apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev \
 # to add this package:
 # sshfs you@remote:/path/to/code ~/code/mount-dir
 # Unmount with fusermount -zu ~/code/mount-dir
-suprt apt-get install -y sshfs
+sudo apt-get install -y sshfs
 
 # Install Ruby through ASDF.
 asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
 asdf install ruby 2.7.1
 asdf global ruby 2.7.1
 
-# Install Ansible.
+# Install Ansible (optional)
 pip3 install --user ansible
 
-# Install AWS CLI v2.
+# Install AWS CLI v2 (optional)
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
   && unzip awscliv2.zip && sudo ./aws/install && rm awscliv2.zip
 
-# Install Terraform.
+# Install Terraform (optional)
 curl "https://releases.hashicorp.com/terraform/0.13.2/terraform_0.13.2_linux_amd64.zip" -o "terraform.zip" \
-  && unzip terraform.zip && chmod +x terraform \
+  && sudo unzip terraform.zip && sudo chmod +x terraform \
   && mv terraform ~/.local/bin && rm terraform.zip
 ```
 
@@ -175,7 +188,7 @@ curl "https://releases.hashicorp.com/terraform/0.13.2/terraform_0.13.2_linux_amd
 ```
 # Image support for ranger (Linux only), this is optional
 sudo apt install ranger libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev python3-pip \
-  && pip install ueberzug
+  && pip3 install ueberzug
 
 # Install the ranger dev icons for browsing in vim
 git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
@@ -184,14 +197,33 @@ git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger
 #### Install neovim (optional) - this is my typescript + LSP vim setup
 
 ```sh
+# Install xserver on WSL otherwise opening nvim will be REALLY slow
+# bashrc already exports DISPLAY and LIBGL_ALWAYS_INDIRECT
+# https://stackoverflow.com/questions/61110603/how-to-set-up-working-x11-forwarding-on-wsl2
+sudo apt install x11-apps
+
+# Install luarocks package manager as Neovim is Lua based
+sudo apt install build-essential libreadline-dev \
+  && curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz \
+  && tar -zxf lua-5.3.5.tar.gz \
+  && cd lua-5.3.5 \
+  && make linux test \
+  && sudo make install \
+  && wget https://luarocks.org/releases/luarocks-3.3.1.tar.gz \
+  && tar zxpf luarocks-3.3.1.tar.gz \
+  && cd luarocks-3.3.1 \
+  && ./configure --with-lua-include=/usr/local/include \
+  && make \
+  && sudo make install
+
 # REQUIRED DEPENDENCIES FROM Dotfiles
 # Please make sure the ranger steps above are followed.
 # Install a nerd font for devicons, I use FiraCode https://webinstall.dev/nerdfont/
 
 # Install neovim - Bleeding edge vim
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage \
-  && chmod u+x nvim.appimage \
-  && ./nvim.appimage
+# currently using nightly build until 0.5.0 is stable
+curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage \
+  && chmod u+x nvim.appimage
 
 # Install pynvim - for Xdebug in nvim
 pip3 install pynvim
@@ -204,29 +236,25 @@ curl https://sh.rustup.rs -sSf | sh \
   && source $HOME/.cargo/env
 
 # Install ripgrep for fuzzy search
-cargo install ripgrep
-# Much cooler htop :)
-cargo install ytop
-
-# Install bat for syntax highlighting on search windows in NVim
-cargo install bat
+cargo install ripgrep ytop bat
 
 # Install vim-plug (PLugin manager)
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-# Install Golang for vmux
+# Install Golang for vmux (if not using tmux, dont bother)
 sudo apt install golang-go && \
-  go get -u github.com/arl/gitmux && \
-  # Clipboard support
-  xsel && \
+  go get -u github.com/arl/gitmux
+
+# Clipboard support (only do this for WSL)
+sudo apt install xsel && \
   curl -sLo/tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip && \
   unzip -p /tmp/win32yank.zip win32yank.exe > /tmp/win32yank.exe && \
   chmod +x /tmp/win32yank.exe && \
   mv /tmp/win32yank.exe ~/bin
 
 # Symlink conf dirs
-ln -s ~/dotfiles/.gitmux.conf ~/.gitmux.conf && \
+ln -s ~/dotfiles/.gitmux.conf ~/.gitmux.conf 
 
 # Install LunarVim
 rm -rf ~/.cache/nvim && \
@@ -249,10 +277,15 @@ bash <(curl -s https://raw.githubusercontent.com/alexmk92/lunarvim/master/utils/
 
 # Install linters
 npm install -g prettier && \
+sudo apt install php7.4-cli && \
+curl -sS https://getcomposer.org/installer -o composer-setup.php && \
+php composer-setup.php --install-dir=/home/alexmk92/.local/bin --filename=composer && \
 composer global require friendsofphp/php-cs-fixer
 
-# Install nvim plugins
-nvim +'PackerInstall' +qa --headless && \
+nvim
+# Run the following commands 
+# :PackerInstall
+# :LspInstall php
 # Install default language servers
 nvim +'LspInstall php' +qa --headless && \
 nvim +'LspInstall js-ts-ls' +qa --headless && \
