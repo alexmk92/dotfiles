@@ -101,11 +101,6 @@ function git {
   fi
 }
 
-### Bro
-export BRO_STATION=${HOME}/.bro
-export WORKSTATION=${HOME}/projects
-source ${HOME}/.bro/activate
-
 # Disable CTRL+S interpret so it doesn't perform a scroll lock
 stty -ixon
 source "$HOME/.cargo/env"
