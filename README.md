@@ -1,80 +1,7 @@
-# dotfiles
+# dotfiles & credit
 
-Here's a bunch of settings for the [various tools I
-use](https://nickjanetakis.com/blog/the-tools-i-use). I also have a number of
-[blog posts and
-videos](https://nickjanetakis.com/blog/tag/dev-environment-tips-tricks-and-tutorials)
-related to my dev environment. There's also this documentation to help you get
-everything installed and configured.
-
-### Documentation
-
-- [View screenshots](#screenshots) of the current set up and how to switch themes
-- [Quickly get set up with these dotfiles](#quickly-get-set-up-with-these-dotfiles)
-  - [Debian](#debian) (native or WSL)
-  - [Ubuntu LTS](#ubuntu-lts) (native or WSL)
-  - [macOS](#macos)
-  - [Extra WSL 1 and WSL 2 steps](#extra-wsl-1-and-wsl-2-steps)
-- [FAQ](#faq)
-  - [How to personalize these dotfiles?](#how-to-personalize-these-dotfiles)
-  - [How to add custom themes to the set-theme script?](#how-to-add-custom-themes-to-the-set-theme-script)
-  - [How to use a different terminal in the set-theme script?](#how-to-use-a-different-terminal-in-the-set-theme-script)
-  - [How to fix Vim taking a long time to open when inside of WSL?](#how-to-fix-vim-taking-a-long-time-to-open-when-inside-of-wsl)
-- [About the author](#about-the-author)
-
-## Screenshots
-
-Since my dotfiles are constantly evolving and I tend to reference them in
-videos, blog posts and various social media posts I thought it would be a good
-idea to include a screenshot of each theme I used and how to switch to it.
-
-I prefer using themes that have good contrast ratios and are clear to see in
-video recordings. These dotfiles currently support easily switching between
-[Gruvbox Community](https://github.com/gruvbox-community/gruvbox) and
-[One](https://github.com/rakr/vim-one) but you can use any theme you'd like.
-
-#### Theme progression
-
-- January 2021 (Gruvbox Community)
-- April 2020 (One)
-- December 2018 (Gruvbox Community)
-
-### Themes
-
-These dotfiles include a `set-theme` script that you can run from your terminal
-to set your theme to any of the themes listed below. This script takes care of
-configuring your terminal, tmux, Vim and FZF's colors in 1 command.
-
-If you don't like the included themes that's no problem. You can use whatever
-you want, there's no limitations. You could choose to manually change the
-colors or [adjust the set-theme
-script](#how-to-add-custom-themes-to-the-set-theme-script) to add a custom
-theme.
-
-Ater installing these dotfiles you can run this from your terminal:
-
-```sh
-# Switch to a supported theme.
-# Theme names are listed below near the screenshots.
-# You can also run set-theme --help to see a list of themes.
-set-theme [theme_name]
-
-# Switch between dark and light backgrounds for the active theme.
-set-theme --toggle-bg
-
-# Switch the theme and toggle the background in 1 command.
-set-theme [theme_name] --toggle-bg
-```
-
-_If you get an error about your terminal config file not being found please
-review [this FAQ
-item](#how-to-use-a-different-terminal-in-the-set-theme-script)._
-
-#### Gruvbox Community
-
-`set-theme gruvbox`
-
-![Dotfiles](https://nickjanetakis.com/assets/blog/dotfiles-c85f20a61decb0d4676530ff4c65a818ee9b362cf9f380a76c9d44e1254d03f3.jpg)
+This dotfiles repo is a fork from the great [Nick Janetakis](https://nickjanetakis.com/). I have extended this to fit my needs.  I'm also using a modified version of 
+[Lunar Vim by Chris@Machine](https://github.com/ChristianChiarulli/LunarVim)
 
 ## Quickly Get Set Up with These Dotfiles
 
@@ -84,7 +11,7 @@ most of these tools will be the same on any OS since they're not OS specific.
 
 ### OS / distro specific installation steps
 
-My set up targets tmux 3.0+ and Vim 8.1+. As long as you can meet those
+My set up targets tmux 3.0+ and Neovim 0.5.0+. As long as you can meet those
 requirements you'll be good to go.
 
 #### Debian
@@ -94,26 +21,6 @@ installing anything. Once you do that then you can proceed to the Ubuntu 20.04
 LTS installation steps below.
 
 Any version after Buster should be good to go without any backports.
-
-#### Ubuntu LTS
-
-##### Ubuntu 18.04 LTS or older
-
-In order to get Vim 8.1+ you'll want to use the PPA below.
-
-```sh
-# Run this before moving on.
-sudo add-apt-repository ppa:jonathonf/vim
-```
-
-As for tmux you'll need to compile it from source to get 3.0+. If you Google
-around for things like "get latest tmux for Ubuntu 18.04", you'll find
-tutorials. I've even seen some for Ubuntu 16.04. Just make sure you compile
-tmux 3.0+.
-
-If you do end up compiling tmux from source, then make sure to remove tmux from
-the list of packages below. Speaking of which, once you've done the above then
-you can proceed to the Ubuntu 20.04 LTS installation steps below.
 
 ##### Ubuntu 20.04 LTS
 
@@ -133,8 +40,7 @@ sudo apt-get update && sudo apt-get install -y \
   rsync \
   shellcheck \
   tmux \
-  unzip \
-  vim-gtk
+  unzip
 ```
 
 The GTK version of Vim is to get +clipboard support, we'll still run terminal
@@ -192,13 +98,17 @@ mkdir -p ~/.local/bin \
   && ln -s ~/dotfiles/.aliases ~/.aliases \
   && ln -s ~/dotfiles/.bashrc ~/.bashrc \
   && ln -s ~/dotfiles/.inputrc ~/inputrc \
-  && ln -s ~/dotfiles/.gemrc ~/.gemrc \
+  # We use ruby for compiling sass, if you don't need ruby, don't sym this
+  && ln -s ~/dotfiles/.gemrc ~/.gemrc \ 
   && ln -s ~/dotfiles/.gitconfig ~/.gitconfig \
   && ln -s ~/dotfiles/.profile ~/.profile \
   && ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf \
   && ln -s ~/dotfiles/.gitignore_global ~/.gitignore_global \
   && ln -s ~/dotfiles/.local/bin/set-theme ~/.local/bin/set-theme \
   && sudo ln -s ~/dotfiles/etc/wsl.conf /etc/wsl.conf
+
+# Create a directory for all of your projects
+mkdir ~/code
 
 # Create your own personal ~/.gitconfig.user file. After copying the file,
 # you should edit it to have your name and email address so git can use it.
@@ -234,28 +144,13 @@ npm install --global yarn
 # Not using Debian or Ubuntu? Here's alternatives for macOS and other Linux distros:
 #   https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
 sudo apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev \
-  libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev libdb-dev \
-  sshfs
+  libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev libdb-dev
 
-# Mount your remote hosts if you need, for example
-# this allows us to edit remote files locally and
-# still get the benefits of code completion.
+# If you would like to use sshfs to work on remote file systems, you'll need 
+# to add this package:
 # sshfs you@remote:/path/to/code ~/code/mount-dir
 # Unmount with fusermount -zu ~/code/mount-dir
-
-# If using SFTP add the appropriate
-# vim-arsync file to the root (this is global git ignored)
-# Ensure the ignore_dotfiles is supplied to prevent
-# .vim-arsync being uploaded to the remote
-# l
-#  remote_host     example.com
-#  remote_user    john
-#  remote_passwd  secret
-#  remote_path     ~/temp/
-#  local_path    /home/ken/temp/vuetest/
-#  ignore_path     ["build/","test/"]
-#  ignore_dotfiles 1
-#  auto_sync_up    1
+suprt apt-get install -y sshfs
 
 # Install Ruby through ASDF.
 asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
@@ -289,6 +184,10 @@ git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger
 #### Install neovim (optional) - this is my typescript + LSP vim setup
 
 ```sh
+# REQUIRED DEPENDENCIES FROM Dotfiles
+# Please make sure the ranger steps above are followed.
+# Install a nerd font for devicons, I use FiraCode https://webinstall.dev/nerdfont/
+
 # Install neovim - Bleeding edge vim
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage \
   && chmod u+x nvim.appimage \
@@ -296,6 +195,9 @@ curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 
 # Install pynvim - for Xdebug in nvim
 pip3 install pynvim
+
+# Install neovim-remote - work on a remote server
+pip3 install neovim-remote
 
 # Install rust (and cargo)
 curl https://sh.rustup.rs -sSf | sh \
@@ -315,33 +217,46 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
 # Install Golang for vmux
 sudo apt install golang-go && \
-  go get -u github.com/arl/gitmux
+  go get -u github.com/arl/gitmux && \
+  # Clipboard support
+  xsel && \
+  curl -sLo/tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip && \
+  unzip -p /tmp/win32yank.zip win32yank.exe > /tmp/win32yank.exe && \
+  chmod +x /tmp/win32yank.exe && \
+  mv /tmp/win32yank.exe ~/bin
 
 # Symlink conf dirs
-ln -s ~/dotfiles/.alacritty.yml ~/.alacritty.yml && \
 ln -s ~/dotfiles/.gitmux.conf ~/.gitmux.conf && \
-mkdir ~/.config/nvim && \
-ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim/init.vim
-ln -s ~/dotfiles/nvim/lua ~/.config/nvim/lua
-ln -s ~/dotfiles/nvim/modules ~/.config/nvim/modules
+
+# Install LunarVim
+rm -rf ~/.cache/nvim && \
+rm -rf ~/.local/share/nvim && \
+bash <(curl -s https://raw.githubusercontent.com/alexmk92/lunarvim/master/utils/installer/install.sh)
+
+# If using SFTP add the appropriate
+# vim-arsync file to the root (this is global git ignored)
+# Ensure the ignore_dotfiles is supplied to prevent
+# .vim-arsync being uploaded to the remote
+# l
+#  remote_host     example.com
+#  remote_user    john
+#  remote_passwd  secret
+#  remote_path     ~/temp/
+#  local_path    /home/ken/temp/vuetest/
+#  ignore_path     ["build/","test/"]
+#  ignore_dotfiles 1
+#  auto_sync_up    1
+
+# Install linters
+npm install -g prettier && \
+composer global require friendsofphp/php-cs-fixer
 
 # Install nvim plugins
-nvim +'PlugInstall' +qa --headless
+nvim +'PackerInstall' +qa --headless && \
+# Install default language servers
+nvim +'LspInstall php' +qa --headless && \
+nvim +'LspInstall js-ts-ls' +qa --headless && \
 ```
-
-#### Install alacritty
-
-# This is only needed for machines which do not have a good graphical terminal editor!
-
-git clone https://github.com/alacritty/alacritty.git && \
- cd alacritty && \
- rustup override set stable && \
- rustup update stable && \
- sudo apt-get install -y cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev && \
- cargo build --release && \
- infocmp alacritty && \
- echo "source $(pwd)/extra/completions/alacritty.bash" >> ~/.bashrc && \
- source ~/.bashrc
 
 #### Install plugins for tmux
 
@@ -398,24 +313,51 @@ Also, you should reboot to activate your `/etc/wsl.conf` file (symlinked
 earlier). That will be necessary if you want to access your mounted drives at
 `/c` or `/d` instead of `/mnt/c` or `/mnt/d`.
 
-## FAQ
+#### Install alacritty (optional)
 
-### How to personalize these dotfiles?
+This is only needed for machines which do not have a good graphical terminal editor,
+you can use Microsofts Terminal app.  Do not follow these steps on WSL1 or WSL2
+as you will need the executable which you can download a prebuilt binary from
+the [alacritty releases](https://github.com/alacritty/alacritty/releases)
 
-Chances are you'll want to personalize some of these files, such as various Vim
-settings. Since this is a git repo you can always do a `git pull` to get the
-most up to date copy of these dotfiles, but then you may find yourself
-clobbering over your own personal changes.
+```
+ln -s ~/dotfiles/.alacritty.yml ~/.alacritty.yml &&
 
-Since we're using git here, we have a few reasonable options.
+git clone https://github.com/alacritty/alacritty.git && \
+ cd alacritty && \
+ rustup override set stable && \
+ rustup update stable && \
+ sudo apt-get install -y cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev && \
+ cargo build --release && \
+ infocmp alacritty && \
+ echo "source $(pwd)/extra/completions/alacritty.bash" >> ~/.bashrc && \
+ source ~/.bashrc
+```
 
-For example, from within this dotfiles git repo you can run `git checkout -b personalized` and now you are free to make whatever changes that you want on
-your custom branch. When it comes time to pull down future updates you can run
-a `git pull origin master` and then `git rebase master` to integrate any
-updates into your branch.
+## Themes
 
-Another option is to fork this repo and use that, then periodically pull and
-merge updates. It's really up to you.
+These dotfiles include a `set-theme` script that you can run from your terminal
+to set your theme to any of the themes listed below. This script takes care of
+configuring your terminal, tmux, Vim and FZF's colors in 1 command.
+
+If you don't like the included themes that's no problem. You can use whatever
+you want, there's no limitations. You could choose to manually change the
+colors or adjust the set-theme script
+
+Ater installing these dotfiles you can run this from your terminal:
+
+```sh
+# Switch to a supported theme.
+# Theme names are listed below near the screenshots.
+# You can also run set-theme --help to see a list of themes.
+set-theme [theme_name]
+
+# Switch between dark and light backgrounds for the active theme.
+set-theme --toggle-bg
+
+# Switch the theme and toggle the background in 1 command.
+set-theme [theme_name] --toggle-bg
+```
 
 ### How to add custom themes to the set-theme script?
 
@@ -457,6 +399,25 @@ You'll want to adjust the `set-theme` script by doing this:
 3. Change the regex in the `change_terminal_theme` function based on your terminal's config option formatting rules
 4. Optionally install Gruvbox, One or any other themes (the MS Terminal config in this repo includes them)
 
+## FAQ
+
+### How to personalize these dotfiles?
+
+Chances are you'll want to personalize some of these files, such as various Vim
+settings. Since this is a git repo you can always do a `git pull` to get the
+most up to date copy of these dotfiles, but then you may find yourself
+clobbering over your own personal changes.
+
+Since we're using git here, we have a few reasonable options.
+
+For example, from within this dotfiles git repo you can run `git checkout -b personalized` and now you are free to make whatever changes that you want on
+your custom branch. When it comes time to pull down future updates you can run
+a `git pull origin master` and then `git rebase master` to integrate any
+updates into your branch.
+
+Another option is to fork this repo and use that, then periodically pull and
+merge updates. It's really up to you.
+
 ### How to fix Vim taking a long time to open when inside of WSL?
 
 It primarily comes down to either VcXsrv not running or a firewall tool
@@ -474,13 +435,3 @@ dotfiles will fix that issue.
 If it still persists, it might be a software firewall issue. You can open TCP
 port 6000 and also restrict access to it from only WSL 2. This will depend on
 which tool you're using to configure that but that should do the trick.
-
-## About the Author
-
-I'm a self taught developer and have been freelancing for the last ~20 years.
-You can read about everything I've learned along the way on my site at
-[https://nickjanetakis.com](https://nickjanetakis.com/). There's hundreds of
-[blog posts](https://nickjanetakis.com/blog/) and a couple of [video
-courses](https://nickjanetakis.com/courses/) on web development and deployment
-topics. I also have a [podcast](https://runninginproduction.com) where I talk
-to folks about running web apps in production.
