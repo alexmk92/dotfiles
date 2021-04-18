@@ -287,8 +287,12 @@ nvim
 # :PackerInstall
 # :LspInstall php
 # Install default language servers
-nvim +'LspInstall php' +qa --headless && \
-nvim +'LspInstall js-ts-ls' +qa --headless && \
+
+
+# Optional
+# Lazy git (for floatrem) go get github.com/jesseduffield/lazygit
+# Lazy docker (for floatrem) go get github.com/jesseduffield/lazydocker
+
 ```
 
 #### Install plugins for tmux
@@ -327,7 +331,7 @@ In addition to the Linux side of things, there's a few config files that I have
 in various directories of this dotfiles repo. These have long Windows paths.
 
 It would be expected that you copy those over to your system while replacing
-"Nick" with your Windows user name if you want to use those things, such as my
+"alexa" with your Windows user name if you want to use those things, such as my
 Microsoft Terminal `settings.json` file and others. Some of the paths may
 also contain unique IDs too, so adjust them as needed on your end.
 
@@ -341,6 +345,9 @@ values in there that you will very likely want to change before using it.
 [This commit
 message](https://github.com/nickjj/dotfiles/commit/d0f1fc2622204b809cf7fcbb1a82d45b451064c4)
 goes into the details.
+
+Once you've done this, feel free to run 
+`cp ~/dotfiles/c/Users/alexa/AppData/* /mnt/c/Users/YOU/AppData`
 
 Also, you should reboot to activate your `/etc/wsl.conf` file (symlinked
 earlier). That will be necessary if you want to access your mounted drives at
