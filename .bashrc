@@ -1,3 +1,5 @@
+cd $HOME
+
 #!/usr/bin/env bash
 # This file runs every time you open a new terminal window.
 
@@ -115,3 +117,4 @@ export BAT_THEME="gruvbox-dark"
     . /usr/share/bash-completion/bash_completion
 
 export PATH="$HOME/local/.bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"

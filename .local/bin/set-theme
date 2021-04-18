@@ -10,10 +10,16 @@ import textwrap
 from pathlib import Path
 from subprocess import run, PIPE
 
-
 THEMES = {
   "gruvbox": {
     "dark": {
+      "nvim": {
+        "statusLineBg": "#303030",
+        "gutter": {
+          "guibg": "#262626",
+          "ctermbg": 235
+        },
+      },
       "terminal": {
         "colorScheme": "Gruvbox Dark",
         "cursorColor": "#ffb261",
@@ -26,6 +32,13 @@ THEMES = {
       }
     },
     "light": {
+      "nvim": {
+        "statusLineBg": "#303030",
+        "gutter": {
+          "guibg": "#262626",
+          "ctermbg": 235
+        },
+      },
       "terminal": {
         "colorScheme": "Gruvbox Light",
         "cursorColor": "#ffb261",
@@ -40,6 +53,13 @@ THEMES = {
   },
   "one": {
     "dark": {
+      "nvim": {
+        "statusLineBg": "#292D38",
+        "gutter": {
+          "guibg": "#292D38",
+          "ctermbg": 235
+        },
+      },
       "terminal": {
         "colorScheme": "One Half Dark",
         "cursorColor": "#6de6f5",
@@ -52,6 +72,13 @@ THEMES = {
       }
     },
     "light": {
+      "nvim": {
+        "statusLineBg": "#292D38",
+        "gutter": {
+          "guibg": "#292D38",
+          "ctermbg": 235
+        },
+      },
       "terminal": {
         "colorScheme": "One Half Light",
         "cursorColor": "#6de6f5",
@@ -64,32 +91,6 @@ THEMES = {
       }
     }
   },
-  "whimsy": {
-    "dark": {
-      "terminal": {
-        "colorScheme": "Whimsy Dark",
-        "cursorColor": "#6de6f5",
-      },
-      "tmux": {
-        "status-style": "fg=colour110",
-        "window-status-current-style": "fg=colour39",
-        "pane-border-style": "fg=colour240",
-        "pane-active-border-style": "fg=colour243"
-      }
-    },
-    "light": {
-      "terminal": {
-        "colorScheme": "Whimsy Light",
-        "cursorColor": "#6de6f5",
-      },
-      "tmux": {
-        "status-style": "fg=colour110",
-        "window-status-current-style": "fg=colour39",
-        "pane-border-style": "fg=colour253",
-        "pane-active-border-style": "fg=colour250"
-      }
-    }
-  }
 }
 
 
@@ -105,7 +106,12 @@ HOME = str(Path.home())
 TERMINAL_CONFIG = f'/c/Users/{get_windows_user()}/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json'  # noqa: E501
 SHELL_CONFIG = f'{HOME}/.bashrc'
 TMUX_CONFIG = f'{HOME}/.tmux.conf'
-VIM_CONFIG = f'{HOME}/.config/nvim/modules/theme.vim'
+
+# NVIM config is stored in a multitude of files as its now split up with Lua
+NVIM_SETTINGS = f'{HOME}/.config/nvim/lv-settings.lua'
+NVIM_GLOBALS = f'{HOME}/.config/nvim/lua/lv-globals.lua'
+NVIM_STATUS_BAR = f'{HOME}/.config/nvim/lua/lv-galaxyline/init.lua'
+NVIM_THEME = f'{HOME}/.config/nvim/vimscript/lv-rainbow-parenthesis/init.vim'
 
 
 def edit_inplace(file, preserve_symlinks=True):
@@ -116,22 +122,22 @@ def edit_inplace(file, preserve_symlinks=True):
 
 
 def active_theme_and_background():
-    with open(VIM_CONFIG, 'r') as f:
+    with open(NVIM_SETTINGS, 'r') as f:
         for line in f:
-            match = re.match('^set background=(.*)$', line)
-            if match:
-                bg = match.group(1)
-                continue
-
-            match = re.match('^colorscheme (.*$)$', line)
+            match = re.match('^O.colorscheme = (.*)$', line)
             if match:
                 theme = match.group(1)
+                continue
+
+            match = re.match('^O.theme = (.*)$', line)
+            if match:
+                bg = match.group(1)
                 continue
     try:
         return theme, bg
     except NameError:
         sys.exit('error: "set background" or "colorscheme" statement not found'
-                 f' in {VIM_CONFIG}')
+                 f' in {NVIM_SETTINGS}')
 
 
 def change_terminal_theme(theme, bg):
@@ -156,13 +162,28 @@ def change_tmux_theme(theme, bg):
 
     run(['tmux', 'source-file', TMUX_CONFIG])
 
-
 def change_vim_theme(theme, bg):
-    with edit_inplace(VIM_CONFIG) as f:
+    statusLineBg = THEMES[theme][bg]['nvim']['statusLineBg']
+    ctermBg      = THEMES[theme][bg]['nvim']['gutter']['ctermbg']
+    guiBg        = THEMES[theme][bg]['nvim']['gutter']['guibg']
+
+    with edit_inplace(NVIM_SETTINGS) as f:
         for line in f:
-            line = re.sub(r'^colorscheme .*$', f'colorscheme {theme}', line)
-            line = re.sub(r'^set background=.*$', f'set background={bg}', line)
+            line = re.sub(r'^O.colorscheme.*$', f'O.colorscheme = \'{theme}\'', line)
+            line = re.sub(r'^O.theme.*$', f'O.theme = \'{bg}\'', line)
             sys.stdout.write(line)
+    with edit_inplace(NVIM_STATUS_BAR) as f:
+      for line in f:
+          line = re.sub(r'^    bg = .*$', f'    bg = \'{statusLineBg}\',', line)
+          sys.stdout.write(line)
+    with edit_inplace(NVIM_GLOBALS) as f:
+      for line in f:
+          line = re.sub(r'^    colorscheme =.*$', f'    colorscheme = \'{theme}\',', line)
+          sys.stdout.write(line)
+    with edit_inplace(NVIM_THEME) as f:
+      for line in f:
+          line = re.sub(r'highlight ColorColumn.*$', f'highlight ColorColumn ctermbg={ctermBg} guibg={guiBg}', line)
+          sys.stdout.write(line)
 
 
 def change_fzf_theme(bg):
@@ -195,6 +216,9 @@ def main():
     args = parseargs()
 
     theme, bg = active_theme_and_background()
+
+    theme = theme.strip("'").strip('"')
+    bg    = bg.strip("'").strip('"')
 
     if args.theme:
         theme = args.theme
