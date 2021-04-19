@@ -1,0 +1,7 @@
+#!/bin/bash
+# only run if changing branches, not if checking out a specific file
+if [ $3 != '1' ]; then
+	if [ "x$1" != "x$2" ]; then
+		vim +:ArsyncUp --headless && exit
+	fi
+fi
