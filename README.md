@@ -218,7 +218,7 @@ sudo apt install build-essential libreadline-dev \
 
 # REQUIRED DEPENDENCIES FROM Dotfiles
 # Please make sure the ranger steps above are followed.
-# Install a nerd font for devicons, I use FiraCode https://webinstall.dev/nerdfont/
+# Install a nerd font for devicons, I use Caskaydia Cove NF https://www.nerdfonts.com/font-downloads
 
 # Install neovim - Bleeding edge vim
 # currently using nightly build until 0.5.0 is stable
@@ -265,7 +265,21 @@ bash <(curl -s https://raw.githubusercontent.com/alexmk92/lunarvim/master/utils/
 # vim-arsync file to the root (this is global git ignored)
 # Ensure the ignore_dotfiles is supplied to prevent
 # .vim-arsync being uploaded to the remote
-# l
+# If you are using remote_passwd you need to install
+# apt-get install sshpass
+# If you omit the remote_passwd from the file, it will
+# attempt to use your ssh-agent to connect.
+#
+# If you're syncing files via SFTP to/from your machine
+# it would be useful to symlink the .githooks to any
+# of the repos that have a .vim-arsync file associated
+# this will then auto sync all files which are not
+# in the ingore_path to the remote server on checkout
+# meaning your home machine becomes the single source
+# of truth.
+#
+# Use ln -s ~/dotfiles/.githooks/* ~/code/your_repo/.git/hooks
+#
 #  remote_host     example.com
 #  remote_user    john
 #  remote_passwd  secret
