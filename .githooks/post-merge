@@ -1,2 +1,4 @@
 #!/bin/bash
-v :ARsyncUp
+echo $PATH
+echo "rsyncing files to remote..."
+~/dotfiles/nvim.appimage +:ARsyncUp --headless

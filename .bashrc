@@ -118,4 +118,4 @@ export BAT_THEME="gruvbox-dark"
 
 export PATH="$HOME/local/.bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
-export PATH="$HOME/usr/lib/w3m/w3mimagedisplay:$PATH"
+export PATH="$HOME/.config/composer/vendor/bin:$PATH"

@@ -1,4 +1,4 @@
-If (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {   
+If (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
   $arguments = "& '" + $myinvocation.mycommand.definition + "'"
   Start-Process powershell -Verb runAs -ArgumentList $arguments
   Break
@@ -10,7 +10,7 @@ $found = $remoteport -match '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}';
 if ( $found ) {
   $remoteport = $matches[0];
 
-  $ports = @(2222, 22001);
+  $ports = @(2222, 22001, 3306);
 
   Invoke-Expression "netsh interface portproxy reset";
 
@@ -21,5 +21,3 @@ if ( $found ) {
 
   Invoke-Expression "netsh interface portproxy show v4tov4";
 }
-
-
