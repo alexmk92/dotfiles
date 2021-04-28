@@ -1,7 +1,6 @@
-cd $HOME
-
 #!/usr/bin/env bash
 # This file runs every time you open a new terminal window.
+cd $HOME
 
 # Limit number of lines and entries in the history. HISTFILESIZE controls the
 # history file on disk and HISTSIZE controls lines stored in memory.
@@ -112,7 +111,7 @@ source "$HOME/.cargo/env"
 # Export theme to be used by nvim in FZF search
 export BAT_THEME="gruvbox-dark"
 
-# Use bash completion if available. 
+# Use bash completion if available.
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
     . /usr/share/bash-completion/bash_completion
 
