@@ -4,3 +4,4 @@ node_modules/*
 .vim-arsync
 tmux??
 .vimspector.json
+.php_cs.cache
