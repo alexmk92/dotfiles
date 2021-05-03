@@ -112,21 +112,18 @@ scrolling:
 
 # Font configuration (changes require restart)
 font:
-  # The normal (roman) font face to use.
+# The normal (roman) font face to use.
   normal:
-    family: SF Mono
-    style: Regular
+    family: CaskaydiaCove Nerd Font
+    style: Book
 
-  # The bold font face
   bold:
-    family: SF Mono
-    style: Bold
+    family: CaskaydiaCove Nerd Font
+    style: Book
 
-  # The italic font face
   italic:
-    family: SF Mono
-    style: Regular Italic
-
+    family: CaskaydiaCove Nerd Font
+    style: Book
   # Point size of the font
   size: 14.0
 
@@ -134,7 +131,7 @@ font:
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
   offset:
     x: 0
-    y: 0
+    y: 16
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increase the x offset to move the glyph to
@@ -481,11 +478,12 @@ key_bindings:
   - { key: Key3,     mods: Command,       chars: "\x06\x33" }
   - { key: Key4,     mods: Command,       chars: "\x06\x34" }
   - { key: Key5,     mods: Command,       chars: "\x06\x35" }
-  - { key: Key6,     mods: Command,       chars: "\x06\x36" }
+  - { key: Key6,     mosds: Command,       chars: "\x06\x36" }
   - { key: Key7,     mods: Command,       chars: "\x06\x37" }
   - { key: Key8,     mods: Command,       chars: "\x06\x38" }
   - { key: Key9,     mods: Command,       chars: "\x06\x39" }
   - { key: Left,     mods: Command,       chars: "\x06\x48" }
   - { key: Down,     mods: Command,       chars: "\x06\x4a" }
   - { key: Up,       mods: Command,       chars: "\x06\x4b" }
-  - { key: Right,    mods: Command,       chars: "\x06\x4c" }n
+  - { key: Right,    mods: Command,       chars: "\x06\x4c" }
+
