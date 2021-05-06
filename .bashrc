@@ -13,11 +13,8 @@ export HISTTIMEFORMAT="%Y/%m/%d %H:%M:%S:   "
 # Duplicate lines and lines starting with a space are not put into the history.
 export HISTCONTROL=ignoreboth
 
-# Append to the history file, don't overwrite it.
-shopt -s histappend
-
-# Ensure $LINES and $COLUMNS always get updated.
-shopt -s checkwinsize
+source "${HOME}"/.asdf/asdf.sh
+source "${HOME}"/.asdf/completions/asdf.bash
 
 # Enable bash completion.
 [ -f /etc/bash_completion ] && source /etc/bash_completion
@@ -46,42 +43,12 @@ xterm*|rxvt*)
     ;;
 esac
 
-# Enable asdf to manage various programming runtime versions.
-#   Requires: https://asdf-vm.com/#/
-source "${HOME}"/.asdf/asdf.sh
-source "${HOME}"/.asdf/completions/asdf.bash
-
-# Start SSH agent on session
-source "${HOME}/.ssh/init.sh"
-
 # Enable a better reverse search experience.
 #   Requires: https://github.com/junegunn/fzf (to use fzf in general)
 #   Requires: https://github.com/BurntSushi/ripgrep (for using rg below)
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 export FZF_DEFAULT_OPTS="--color=dark"
 [ -f "${HOME}/.fzf.bash" ] && source "${HOME}/.fzf.bash"
-
-# WSL 2 specific settings.
-if grep -q "microsoft" /proc/version &>/dev/null; then
-    # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
-    export DISPLAY="$(/sbin/ip route | awk '/default/ { print $3 }'):0"
-    # OpenGL
-    export LIBGL_ALWAYS_INDIRECT=1
-
-    # Allows your gpg passphrase prompt to spawn (useful for signing commits).
-    export GPG_TTY=$(tty)
-fi
-
-# WSL 1 specific settings.
-if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
-    if [ "$(umask)" = "0000" ]; then
-        umask 0022
-    fi
-
-    # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
-    export DISPLAY=:0
-fi
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # checks to see if we are in a windows or linux dir
@@ -118,3 +85,4 @@ export BAT_THEME="gruvbox-dark"
 export PATH="$HOME/local/.bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+. "$HOME/.cargo/env"
