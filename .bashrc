@@ -105,8 +105,6 @@ function git {
 # Disable CTRL+S interpret so it doesn't perform a scroll lock
 stty -ixon
 source "$HOME/.cargo/env"
-# source ${HOME}/alacritty/extra/completions/alacritty.bash
-# source ${HOME}/alacritty/extra/completions/alacritty.bash
 
 # Export theme to be used by nvim in FZF search
 export BAT_THEME="gruvbox-dark"
@@ -118,3 +116,6 @@ export BAT_THEME="gruvbox-dark"
 export PATH="$HOME/local/.bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+. "$HOME/.cargo/env"
+
+source ~/.bash_completion

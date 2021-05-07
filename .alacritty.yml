@@ -114,27 +114,27 @@ scrolling:
 font:
   # The normal (roman) font face to use.
   normal:
-    family: SF Mono
-    style: Regular
+    family: CaskaydiaCove Nerd Font
+    style: Book
 
   # The bold font face
   bold:
-    family: SF Mono
-    style: Bold
+    family: CaskaydiaCove Nerd Font
+    style: Book
 
   # The italic font face
   italic:
-    family: SF Mono
-    style: Regular Italic
+    family: CaskaydiaCove Nerd Font
+    style: Book
 
   # Point size of the font
-  size: 14.0
+  size: 11.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
   offset:
     x: 0
-    y: 0
+    y: 4
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increase the x offset to move the glyph to
@@ -151,68 +151,6 @@ font:
 debug:
   # Should display the render timer
   render_timer: false
-
-# schemes:
-#   gruvbox_light: &light
-#     # Default colors
-#     primary:
-#       background: '0xf9f5d7' # hard contrast
-#       # background: '0xfbf1c7' # normal
-#       # soft contrast: background = '0xf2e5bc'
-#       foreground: '0x3c3836'
-
-#     # Normal colors
-#     normal:
-#       black:   '0xfbf1c7'
-#       red:     '0xcc241d'
-#       green:   '0x98971a'
-#       yellow:  '0xd79921'
-#       blue:    '0x458588'
-#       magenta: '0xb16286'
-#       cyan:    '0x689d6a'
-#       white:   '0x7c6f64'
-
-#     # Bright colors
-#     bright:
-#       black:   '0x928374'
-#       red:     '0x9d0006'
-#       green:   '0x79740e'
-#       yellow:  '0xb57614'
-#       blue:    '0x076678'
-#       magenta: '0x8f3f71'
-#       cyan:    '0x427b58'
-#       white:   '0x3c3836'
-#   gruvbox_dark: &dark
-#     # Default colors
-#     primary:
-#       background: '0x1d2021' # hard contrast
-#       # background: '0x282828' # normal contrast
-#       foreground: '0xebdbb2'
-
-#     # Normal colors
-#     normal:
-#       black:   '0x282828'
-#       red:     '0xcc241d'
-#       green:   '0x98971a'
-#       yellow:  '0xd79921'
-#       blue:    '0x458588'
-#       magenta: '0xb16286'
-#       cyan:    '0x689d6a'
-#       white:   '0xa89984'
-
-#     # Bright colors
-#     bright:
-#       black:   '0x928374'
-#       red:     '0xfb4934'
-#       green:   '0xb8bb26'
-#       yellow:  '0xfabd2f'
-#       blue:    '0x83a598'
-#       magenta: '0xd3869b'
-#       cyan:    '0x8ec07c'
-#       white:   '0xebdbb2'
-
-# colors: *dark
-
 
 # Visual Bell
 #
@@ -241,7 +179,7 @@ bell:
   duration: 0
 
 # Background opacity
-background_opacity: 1.0
+background_opacity: 0.9
 
 # Mouse bindings
 #
@@ -273,19 +211,6 @@ mouse:
   # If this is `true`, the cursor is temporarily hidden when typing.
   hide_when_typing: true
 
-  url:
-    # URL launcher
-    #
-    # This program is executed when clicking on a text which is recognized as a URL.
-    # The URL is always added to the command as the last parameter.
-    launcher: open
-
-    # URL modifiers
-    #
-    # These are the modifiers that need to be held down for opening URLs when clicking
-    # on them. The available modifiers are documented in the key binding section.
-    #modifiers: Control|Shift
-
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
@@ -301,7 +226,7 @@ cursor:
   #   - ▇ Block
   #   - _ Underline
   #   - | Beam
-  style: Block
+  style: Beam
   unfocused_hollow: false
 
 # Live config reload (changes require restart)
@@ -318,7 +243,7 @@ live_config_reload: true
 #     - --login
 #
 shell:
-  program: /usr/local/bin/tmux
+  program: tmux
   args:
     - new-session
     - -A
@@ -488,4 +413,4 @@ key_bindings:
   - { key: Left,     mods: Command,       chars: "\x06\x48" }
   - { key: Down,     mods: Command,       chars: "\x06\x4a" }
   - { key: Up,       mods: Command,       chars: "\x06\x4b" }
-  - { key: Right,    mods: Command,       chars: "\x06\x4c" }n
+  - { key: Right,    mods: Command,       chars: "\x06\x4c" }
